@@ -1,0 +1,98 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.custom-background {
+    background-color: hsla(130, 0%, 4%, 1);
+    background-image: 
+        radial-gradient(at 79% 0%, hsla(258, 100%, 50%, 0.44) 0px, transparent 50%),
+        radial-gradient(at 40% 98%, hsla(266, 100%, 40%, 0.57) 0px, transparent 50%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Footer Specific Styles */
+footer {
+    position: relative;
+    z-index: 10;
+  }
+  
+  footer a:hover {
+    text-decoration: none;
+  }
+  
+  .newsletter-input:focus {
+    box-shadow: 0 0 0 2px rgba(163, 230, 53, 0.5);
+  }
+  
+  @media (max-width: 768px) {
+    footer {
+      text-align: center;
+    }
+  
+    footer .grid {
+      gap: 2rem;
+    }
+  }
+ /* Custom animations */
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(34, 211, 238, 0.2); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Custom styles */
+.glassmorphism {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(34, 211, 238, 0.1);
+}
+
+.glow-effect {
+  animation: glow 3s infinite;
+}
+
+.float-effect {
+  animation: float 3s ease-in-out infinite;
+}
+
+.hover-scale {
+  transition: transform 0.2s ease-in-out;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(to right, #22d3ee, #10b981);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 238, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 211, 238, 0.5);
+}
