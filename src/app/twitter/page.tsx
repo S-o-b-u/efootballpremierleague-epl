@@ -18,7 +18,7 @@ const page = () => {
       thumbnailSrc="../images/brainrot.jpg"
       thumbnailAlt="Hero Video"
     />
-    <h1 className='text-white text-[5vh] text-center font-semibold'>Bhai BRAVE main maat kholna!!</h1>
+    <h1 className='text-white text-[5vh] text-center font-semibold'>Bhai Fuddi Chato Daab Ke!!</h1>
   </div>
   )
 }
