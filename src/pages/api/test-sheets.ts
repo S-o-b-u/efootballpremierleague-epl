@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { google } from 'googleapis';
 import path from 'path';
+import { JWT } from 'google-auth-library';
 
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
@@ -17,7 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const { name, phoneNumber, collectiveStrength, age, paymentStatus } = req.body;
 
       // Authenticate using the service account
-      const authClient = await auth.getClient();
+      const authClient = await auth.getClient() as JWT;
 
       const spreadsheetId = process.env.SHEET_ID; // Your spreadsheet ID from environment variable
       const range = process.env.RANGE; // Use the range from environment variable
