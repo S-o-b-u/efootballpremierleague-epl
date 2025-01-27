@@ -2,7 +2,6 @@
 import Loader from "@/components/Loader";
 import Background from "@/components/Background";
 import { CarouselPlugin } from "@/components/Carousal";
-import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";

@@ -26,6 +26,7 @@ export default function RootLayout({
         <ReactLenis root>
           <NextUIProvider>
             <Navbar />
+            
             {children}
             <ToastContainer />
           </NextUIProvider>
