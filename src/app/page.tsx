@@ -157,7 +157,7 @@ const Home = () => {
     { value: "20", label: "Active Players", prefix: "", suffix: "+" },
     { value: "120", label: "Monthly Matches", prefix: "", suffix: "+" },
     { value: "10", label: "Pro Teams", prefix: "", suffix: "+" },
-    { value: "500", label: "Prize Pool", prefix: "₹", suffix: "/-" },
+    { value: "400", label: "Prize Pool", prefix: "₹", suffix: "/-" },
   ];
 
   return (
