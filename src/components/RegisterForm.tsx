@@ -236,7 +236,7 @@ const RegisterForm = () => {
             </div>
             <div className="text-center">
               <p className="text-lg font-semibold text-white mb-2">
-                Registration Fee: 40/-
+                Registration Fee: ₹40/-
               </p>
               <p className="text-sm text-gray-300">
                 After payment, please take a screenshot for your records

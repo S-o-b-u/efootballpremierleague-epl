@@ -154,9 +154,9 @@ const Home = () => {
   }, [loading]);
 
   const stats = [
-    { value: "50", label: "Active Players", prefix: "", suffix: "+" },
+    { value: "20", label: "Active Players", prefix: "", suffix: "+" },
     { value: "120", label: "Monthly Matches", prefix: "", suffix: "+" },
-    { value: "30", label: "Pro Teams", prefix: "", suffix: "+" },
+    { value: "10", label: "Pro Teams", prefix: "", suffix: "+" },
     { value: "500", label: "Prize Pool", prefix: "₹", suffix: "/-" },
   ];
 
