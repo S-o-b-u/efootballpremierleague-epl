@@ -6,9 +6,9 @@ import Footer from "@/components/Footer";
 
 const Rankings = () => {
   const players = [
-    { rank: 1, name: "John Doe", points: 45, wins: 15, losses: 3 },
-    { rank: 2, name: "Jane Smith", points: 42, wins: 14, losses: 4 },
-    { rank: 3, name: "Mike Johnson", points: 39, wins: 13, losses: 5 },
+    { rank: 1, name: "Sarnadeep Das", points: 18, wins: 6, losses: 1 },
+    { rank: 2, name: "Abir Dutta", points: 16, wins: 5, losses: 1 },
+    { rank: 3, name: "Snehasish Saha", points: 15, wins: 5, losses: 1 },
   ];
 
   return (
@@ -31,9 +31,9 @@ const Rankings = () => {
           {/* Stats Overview */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { title: "Total Matches", value: "156", icon: <TrendingUp /> },
-              { title: "Goals Scored", value: "487", icon: <Trophy /> },
-              { title: "Avg Goals", value: "3.12", icon: <Trophy /> },
+              { title: "Total Matches", value: "40", icon: <TrendingUp /> },
+              { title: "Goals Scored", value: "231", icon: <Trophy /> },
+              { title: "Avg Goals", value: "5.78", icon: <Trophy /> },
             ].map((stat, index) => (
               <div
                 key={index}
