@@ -222,7 +222,7 @@ const RegisterForm = () => {
                 onClick={() => {
                   if (/Mobi|Android/i.test(navigator.userAgent)) {
                     window.location.href =
-                      "upi://pay?pa=snehasishsaha552-1@oksbi&pn=Snehasish&mc=Snehasish&tid=1234567890&tr=uniqueReferenceId&tn=Payment%20for%20Registration&am=50.00&cu=INR";
+                      "upi://pay?pa=snehasishsaha552-1@oksbi&pn=Snehasish&mc=Snehasish&tid=1234567890&tr=uniqueReferenceId&tn=Payment%20for%20Registration&am=40.00&cu=INR";
                   } else {
                     alert(
                       "Please use a mobile device to make the payment or you can scan the QR"
@@ -236,7 +236,7 @@ const RegisterForm = () => {
             </div>
             <div className="text-center">
               <p className="text-lg font-semibold text-white mb-2">
-                Registration Fee: 50/-
+                Registration Fee: 40/-
               </p>
               <p className="text-sm text-gray-300">
                 After payment, please take a screenshot for your records
