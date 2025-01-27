@@ -222,7 +222,7 @@ const RegisterForm = () => {
                 onClick={() => {
                   if (/Mobi|Android/i.test(navigator.userAgent)) {
                     window.location.href =
-                      "upi://pay?pa=yourmerchant@upi&pn=yourmerchant&mc=yourmerchant&tid=1234567890&tr=yourmerchantreferenceid&tn=yourmerchant&am=1.00&cu=INR";
+                      "upi://pay?pa=snehasishsaha552-1@oksbi&pn=Snehasish&mc=Snehasish&tid=1234567890&tr=uniqueReferenceId&tn=Payment%20for%20Registration&am=50.00&cu=INR";
                   } else {
                     alert(
                       "Please use a mobile device to make the payment or you can scan the QR"
