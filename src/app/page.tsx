@@ -41,7 +41,6 @@ const AnimatedCounter = ({ end, duration = 2 }: AnimatedCounterProps) => {
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
-  const [hasAnimated, setHasAnimated] = useState(false);
   const headingRef = useRef<HTMLHeadingElement | null>(null);
   const textRef = useRef<HTMLParagraphElement | null>(null);
   const buttonsRef = useRef<HTMLDivElement | null>(null);
@@ -53,112 +52,103 @@ const Home = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    const animated = localStorage.getItem("hasAnimated");
-    if (animated) {
-      setHasAnimated(true);
-      setLoading(false);
-    } else {
-      if (!loading) {
-        if (headingRef.current && textRef.current && buttonsRef.current && carouselRef.current) {
-          gsap.set(
-            [
-              headingRef.current,
-              textRef.current,
-              buttonsRef.current,
-              statsRefMobile.current,
-              statsRefDesktop.current,
-            ],
-            {
-              opacity: 0,
-              y: 50,
-            }
-          );
-
-          gsap.set(carouselRef.current, {
+    if (!loading) {
+      if (headingRef.current && textRef.current && buttonsRef.current && carouselRef.current) {
+        gsap.set(
+          [
+            headingRef.current,
+            textRef.current,
+            buttonsRef.current,
+            statsRefMobile.current,
+            statsRefDesktop.current,
+          ],
+          {
             opacity: 0,
-            scale: 0.9,
-          });
+            y: 50,
+          }
+        );
 
-          const tl = gsap.timeline({
-            defaults: { ease: "power3.out" },
-            onComplete: () => {
-              setStartCounting(true);
-              localStorage.setItem("hasAnimated", "true");
-            },
-          });
+        gsap.set(carouselRef.current, {
+          opacity: 0,
+          scale: 0.9,
+        });
 
-          tl.to(carouselRef.current, {
-            opacity: 1,
-            scale: 1,
-            duration: 1,
-          })
-            .to(
-              statsRefMobile.current,
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.3,
-                stagger: 0.1,
-              },
-              "-=0.4"
-            )
-            .to(headingRef.current, {
+        const tl = gsap.timeline({
+          defaults: { ease: "power3.out" },
+          onComplete: () => setStartCounting(true),
+        });
+
+        tl.to(carouselRef.current, {
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+        })
+          .to(
+            statsRefMobile.current,
+            {
               opacity: 1,
               y: 0,
-              duration: 0.4,
-            })
-            .to(
-              textRef.current,
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.3,
-              },
-              "-=0.4"
-            )
-            .to(
-              buttonsRef.current,
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.3,
-              },
-              "-=0.4"
-            )
-            .to(
-              statsRefDesktop.current,
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.3,
-              },
-              "-=0.4"
-            );
+              duration: 0.3,
+              stagger: 0.1,
+            },
+            "-=0.4"
+          )
+          .to(headingRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+          })
+          .to(
+            textRef.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.3,
+            },
+            "-=0.4"
+          )
+          .to(
+            buttonsRef.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.3,
+            },
+            "-=0.4"
+          )
+          .to(
+            statsRefDesktop.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.3,
+            },
+            "-=0.4"
+          );
 
-          const buttons = document.querySelectorAll(".hover-scale");
-          buttons.forEach((button) => {
-            button.addEventListener("mouseenter", () => {
-              gsap.to(button, {
-                scale: 1.05,
-                duration: 0.3,
-                ease: "power2.out",
-              });
-            });
-            button.addEventListener("mouseleave", () => {
-              gsap.to(button, {
-                scale: 1,
-                duration: 0.3,
-                ease: "power2.out",
-              });
+        const buttons = document.querySelectorAll(".hover-scale");
+        buttons.forEach((button) => {
+          button.addEventListener("mouseenter", () => {
+            gsap.to(button, {
+              scale: 1.05,
+              duration: 0.3,
+              ease: "power2.out",
             });
           });
-        }
+          button.addEventListener("mouseleave", () => {
+            gsap.to(button, {
+              scale: 1,
+              duration: 0.3,
+              ease: "power2.out",
+            });
+          });
+        });
       }
     }
   }, [loading]);
