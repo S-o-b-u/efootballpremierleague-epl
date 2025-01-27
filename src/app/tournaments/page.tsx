@@ -53,7 +53,7 @@ const Tournaments = () => {
               <div className="flex items-center gap-4 text-cyan-400">
                 <div className="flex items-center gap-1">
                   <Calendar className="h-4 w-4" />
-                  <span className="text-sm">Feb 1 - Feb 28</span>
+                  <span className="text-sm">Feb 6 - Feb 28</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Users2 className="h-4 w-4" />
