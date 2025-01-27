@@ -19,8 +19,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       // Authenticate using the service account
       const authClient = await auth.getClient();
 
-      const spreadsheetId = '1v9aR6ILyaH7LvHegKdWpG7n-TJ3DcCRCTOQvnpioz4c'; // Your spreadsheet ID
-      const range = 'Sheet1!A2:E'; // Use the appropriate range, assuming you're adding below row 1
+      const spreadsheetId = process.env.SHEET_ID; // Your spreadsheet ID from environment variable
+      const range = process.env.RANGE; // Use the range from environment variable
 
       const request = {
         spreadsheetId,
