@@ -1,27 +1,44 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { google } from 'googleapis';
-import path from 'path';
 import { JWT } from 'google-auth-library';
-
-const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
-
-const auth = new google.auth.GoogleAuth({
-  keyFile: CREDENTIALS_PATH,
-  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-});
-
-const sheets = google.sheets('v4');
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     try {
       const { name, phoneNumber, collectiveStrength, age, paymentStatus } = req.body;
 
-      // Authenticate using the service account
+      const spreadsheetId = process.env.SHEET_ID; // Your spreadsheet ID from environment variable
+      const range = process.env.RANGE; // Use the range from environment variable
+
+      // Log the values to check if they are set
+      console.log('Spreadsheet ID:', spreadsheetId);
+      console.log('Range:', range);
+
+      if (!spreadsheetId || !range) {
+        throw new Error('SHEET_ID or RANGE is not set in the environment variables.');
+      }
+
+      if (!name || !phoneNumber || !collectiveStrength || !age || !paymentStatus) {
+        return res.status(400).json({ message: 'All fields are required.' });
+      }
+
+      // Decode the Google Application Credentials
+      const credentialsBase64 = process.env.GOOGLE_APPLICATION_CREDENTIALS_BASE64;
+      if (!credentialsBase64) {
+        throw new Error('GOOGLE_APPLICATION_CREDENTIALS_BASE64 is not set in the environment variables.');
+      }
+      const credentialsJson = Buffer.from(credentialsBase64, 'base64').toString('utf8');
+      const credentials = JSON.parse(credentialsJson);
+
+      // Authenticate using the credentials
+      const auth = new google.auth.GoogleAuth({
+        credentials,
+        scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+      });
+
       const authClient = await auth.getClient() as JWT;
 
-      const spreadsheetId = "1v9aR6ILyaH7LvHegKdWpG7n-TJ3DcCRCTOQvnpioz4c"; // Your spreadsheet ID from environment variable
-      const range = "Sheet1!A2:E"; // Use the range from environment variable
+      const sheets = google.sheets({ version: 'v4', auth: authClient });
 
       const request = {
         spreadsheetId,
@@ -33,16 +50,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         auth: authClient,
       };
 
-      // Append data to the spreadsheet
-      const response: any = await sheets.spreadsheets.values.append(request);
+      // Append data to Google Sheets
+      const response = await sheets.spreadsheets.values.append(request);
 
-      // Log the response to inspect its structure
-      console.log('Google Sheets Response:', response);
-
-      // Return success response with the data
+      console.log('Google Sheets Response:', response.data);
+      console.log('SHEET_ID:', process.env.SHEET_ID);
+      console.log('RANGE:', process.env.RANGE);
+      
       res.status(200).json({
         message: 'Data added successfully',
-        data: response.data, // Ensure you are correctly accessing the response data
+        data: response.data,
       });
     } catch (error) {
       console.error('Error adding data:', error);
@@ -52,6 +69,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       });
     }
   } else {
-    res.status(405).json({ message: 'Method not allowed' }); // Handle other HTTP methods
+    res.status(405).json({ message: 'Method not allowed' });
   }
 };
