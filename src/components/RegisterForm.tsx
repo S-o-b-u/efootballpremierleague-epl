@@ -33,6 +33,13 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    
+    // Disable the button to prevent multiple submissions
+    const submitButton = e.currentTarget.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.setAttribute('disabled', 'true');
+    }
+
     handleClick(); // Trigger confetti on submit
 
     try {
@@ -66,6 +73,11 @@ const RegisterForm = () => {
         setStatusMessage(`Error: ${error.message}`);
       } else {
         setStatusMessage("An unknown error occurred.");
+      }
+    } finally {
+      // Re-enable the button after the request is complete
+      if (submitButton) {
+        submitButton.removeAttribute('disabled');
       }
     }
     
