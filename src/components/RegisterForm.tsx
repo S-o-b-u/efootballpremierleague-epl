@@ -21,6 +21,7 @@ const RegisterForm = () => {
   });
 
   const [statusMessage, setStatusMessage] = useState<string>("");
+  const [showWhatsAppButton, setShowWhatsAppButton] = useState<boolean>(false);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -67,6 +68,9 @@ const RegisterForm = () => {
         setStatusMessage("An unknown error occurred.");
       }
     }
+    
+    // Add this line to show the WhatsApp button after successful registration
+    setShowWhatsAppButton(true); 
   };
 
   const handleClick = () => {
@@ -193,6 +197,18 @@ const RegisterForm = () => {
                 }`}
               >
                 {statusMessage}
+              </div>
+            )}
+            
+            {/* Add WhatsApp button here */}
+            {showWhatsAppButton && (
+              <div className="mt-4">
+                <button
+                  onClick={() => window.open("https://chat.whatsapp.com/Ep8tPP3Ys6NL8bLjIp3ZGk", "_blank")}
+                  className="w-full py-3 px-6 text-white bg-green-500 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] font-medium"
+                >
+                  Join Our WhatsApp Group
+                </button>
               </div>
             )}
           </div>
