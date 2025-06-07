@@ -80,7 +80,8 @@ export default {
         },
       },
 	  fontFamily: {
-        custom: ['CustomFont'], 
+        custom: ['CustomFont'],
+        myfont: ['MyFont', 'sans-serif'], 
       },
     },
   },

@@ -92,6 +92,12 @@ export default function Navbar() {
             >
               Rankings
             </Link>
+            <Link
+              className="hover:text-teal-400 duration-300"
+              href={"/instagram"}
+            >
+              Feed
+            </Link>
             <Link className="hover:text-teal-400 duration-300" href={"/season"}>
               Season
             </Link>

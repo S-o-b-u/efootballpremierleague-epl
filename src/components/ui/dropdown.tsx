@@ -32,6 +32,9 @@ export default function Menu() {
         <DropdownItem key="rankings">
           <Link href="/rankings" style={{ display: 'block', width: '100%', height: '100%' }}>Rankings</Link>
         </DropdownItem>
+        <DropdownItem key="Feed">
+          <Link href="/instagram" style={{ display: 'block', width: '100%', height: '100%' }}>Feed</Link>
+        </DropdownItem>
         <DropdownItem key="about">
           <Link href="/about" style={{ display: 'block', width: '100%', height: '100%' }}>About Us</Link>
         </DropdownItem>
