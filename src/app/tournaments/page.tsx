@@ -47,7 +47,7 @@ const Tournaments = () => {
                   Live
                 </span>
                 <h2 className="text-xl font-bold gradient-text">
-                  Efootball Fuckers Cup | Season 1
+                  EPL Arena Cup | Season 1
                 </h2>
               </div>
               <div className="flex items-center gap-4 text-cyan-400">
