@@ -86,12 +86,12 @@ export default function Navbar() {
             >
               Tournament
             </Link>
-            <Link
+            {/* <Link
               className="hover:text-teal-400 duration-300"
               href={"/rankings"}
             >
               Rankings
-            </Link>
+            </Link> */}
             <Link
               className="hover:text-teal-400 duration-300"
               href={"/instagram"}

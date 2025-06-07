@@ -19,7 +19,7 @@ const Rankings = () => {
             <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
               <Trophy className="h-8 w-8 text-cyan-400 float-effect" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#56c5bc] via-[#14B8A6] to-[#0EA5E9] drop-shadow-[0_0_10px_rgba(14,181,233,0.7)] ">
-                Season 1 Rankings
+                EPL Season 2 Rankings
               </span>
             </h1>
           </div>

@@ -20,18 +20,18 @@ export default function Menu() {
         </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Link Actions">
-        <DropdownItem key="Home">
+        {/* <DropdownItem key="Home">
           <Link href="/" style={{ display: 'block', width: '100%', height: '100%' }}>Home</Link>
-        </DropdownItem>
+        </DropdownItem> */}
         <DropdownItem key="season">
           <Link href="/season" style={{ display: 'block', width: '100%', height: '100%' }}>Season</Link>
         </DropdownItem>
         <DropdownItem key="tournaments">
           <Link href="/tournaments" style={{ display: 'block', width: '100%', height: '100%' }}>Tournaments</Link>
         </DropdownItem>
-        <DropdownItem key="rankings">
+        {/* <DropdownItem key="rankings">
           <Link href="/rankings" style={{ display: 'block', width: '100%', height: '100%' }}>Rankings</Link>
-        </DropdownItem>
+        </DropdownItem> */}
         <DropdownItem key="Feed">
           <Link href="/instagram" style={{ display: 'block', width: '100%', height: '100%' }}>Feed</Link>
         </DropdownItem>
