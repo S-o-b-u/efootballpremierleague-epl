@@ -17,9 +17,9 @@ const Tournaments = () => {
     },
     {
       id: 2,
-      name: "EPL Cup 2025",
+      name: "EPL SEASON 3 | 2025",
       status: "upcoming",
-      startDate: "2025-02-06",
+      startDate: "2025-07-01",
       endDate: "Not Mentioned",
       participants: "20+",
       format: "League Format",
@@ -44,26 +44,26 @@ const Tournaments = () => {
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-2">
                 <span className="px-2 py-1 bg-emerald-400 text-black text-wrap text-center text-xs font-semibold rounded-full">
-                  Not Started
+                  Live
                 </span>
                 <h2 className="text-xl font-bold gradient-text">
-                  Season 2 | Efootball Premier League
+                  Efootball Fuckers Cup | Season 1
                 </h2>
               </div>
               <div className="flex items-center gap-4 text-cyan-400">
                 <div className="flex items-center gap-1">
                   <Calendar className="h-4 w-4" />
-                  <span className="text-sm">Feb 6 - Feb 28</span>
+                  <span className="text-sm">Jun 1- Jun 15</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Users2 className="h-4 w-4" />
-                  <span className="text-sm">20+ Players</span>
+                  <span className="text-sm">6 Players</span>
                 </div>
               </div>
               <div className="glassmorphism flex flex-col gap-2 px-4 py-4 rounded-lg">
                 <div className="text-sm text-cyan-400">Progress</div>
                 <div className="text-2xl font-bold gradient-text">
-                  0/0 Matches
+                  15/30 Matches
                 </div>
               </div>
             </div>
@@ -111,28 +111,78 @@ const Tournaments = () => {
           <h2 className="text-xl font-bold mb-4 gradient-text">
             Previous Tournaments
           </h2>
-          <div className="glassmorphism rounded-lg p-6">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-              <div className="flex flex-col gap-5">
-                <h3 className="text-lg font-semibold gradient-text">
-                  Season 1 | Efootball Premier League
-                </h3>
-                <div className="flex items-center gap-4 text-cyan-400">
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
-                    <span className="text-sm">Completed Dec 2024</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Trophy className="h-4 w-4 text-emerald-400" />
-                    <span className="text-sm">Winner: Sarnadip Das</span>
+          <div className="flex flex-col gap-5">
+            <div className="glassmorphism rounded-lg p-6">
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                <div className="flex flex-col gap-5">
+                  <h3 className="text-lg font-semibold gradient-text">
+                    Season 1 | Efootball Derby Cup
+                  </h3>
+                  <div className="flex items-center gap-4 text-cyan-400">
+                    <div className="flex items-center gap-2">
+                      <Clock className="h-4 w-4" />
+                      <span className="text-sm">Completed May 2025</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Trophy className="h-4 w-4 text-emerald-400" />
+                      <span className="text-sm">Winner: Trishan & Soummyadip</span>
+                    </div>
                   </div>
                 </div>
+                <Link href={"/instagram"}>
+                  <button className="text-cyan-400 hover:text-emerald-400 text-sm transition-colors duration-150">
+                    View Details
+                  </button>
+                </Link>
               </div>
-              <Link href={"/season"}>
-                <button className="text-cyan-400 hover:text-emerald-400 text-sm transition-colors duration-150">
-                  View Details
-                </button>
-              </Link>
+            </div>
+            <div className="glassmorphism rounded-lg p-6">
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                <div className="flex flex-col gap-5">
+                  <h3 className="text-lg font-semibold gradient-text">
+                    Season 2 | Efootball Premier League
+                  </h3>
+                  <div className="flex items-center gap-4 text-cyan-400">
+                    <div className="flex items-center gap-2">
+                      <Clock className="h-4 w-4" />
+                      <span className="text-sm">Completed Feb 2025</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Trophy className="h-4 w-4 text-emerald-400" />
+                      <span className="text-sm">Winner: Abir Dutta</span>
+                    </div>
+                  </div>
+                </div>
+                <Link href={"/instagram"}>
+                  <button className="text-cyan-400 hover:text-emerald-400 text-sm transition-colors duration-150">
+                    View Details
+                  </button>
+                </Link>
+              </div>
+            </div>
+            <div className="glassmorphism rounded-lg p-6">
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                <div className="flex flex-col gap-5">
+                  <h3 className="text-lg font-semibold gradient-text">
+                    Season 1 | Efootball Premier League
+                  </h3>
+                  <div className="flex items-center gap-4 text-cyan-400">
+                    <div className="flex items-center gap-2">
+                      <Clock className="h-4 w-4" />
+                      <span className="text-sm">Completed Dec 2024</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Trophy className="h-4 w-4 text-emerald-400" />
+                      <span className="text-sm">Winner: Sarnadip Das</span>
+                    </div>
+                  </div>
+                </div>
+                <Link href={"/instagram"}>
+                  <button className="text-cyan-400 hover:text-emerald-400 text-sm transition-colors duration-150">
+                    View Details
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

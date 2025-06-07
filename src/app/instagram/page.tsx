@@ -35,10 +35,10 @@ export default function InstagramGrid() {
   }, []);
 
   const posts = [
+    
     "https://www.instagram.com/p/DKaIHKQT3A_/",
     "https://www.instagram.com/p/DKUUm6UzICV/",
     "https://www.instagram.com/p/DDAcEfTznEB/",
-
     "https://www.instagram.com/p/DKaHCRlz300/",
     "https://www.instagram.com/p/DDm6Ijrz0Wl",
     "https://www.instagram.com/p/DKZ8RWrT5e0/",
