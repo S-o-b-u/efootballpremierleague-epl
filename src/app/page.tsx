@@ -203,7 +203,7 @@ const Home = () => {
                   className="text-[5vh] md:text-[8vh] lg:text-[12vh] leading-[1.2] custom-text mb-10"
                 >
                   <Magnet padding={500} disabled={false} magnetStrength={50}>
-                    <span className="text-[5vh] md:text-[10vh] lg:text-[15vh] text-transparent bg-clip-text bg-gradient-to-r from-[#56c5bc] via-[#14B8A6] to-[#0EA5E9] drop-shadow-[0_0_10px_rgba(14,181,233,0.7)] animate-pulse">
+                    <span className="text-[5vh] md:text-[10vh] lg:text-[15vh] text-transparent bg-clip-text bg-gradient-to-r from-[#56c5bc] via-[#14B8A6] to-[#0EA5E9] drop-shadow-[0_0_5px_rgba(14,181,233,0.7)] animate-pulse">
                       Your League,
                     </span>
                   </Magnet>
