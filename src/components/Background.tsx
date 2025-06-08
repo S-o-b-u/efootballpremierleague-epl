@@ -12,7 +12,7 @@ export default function Background({ children }: Props) {
   const { loading } = useLoading();
 
   return (
-    <div className={`relative w-full h-screen scrollbar-hide ${loading ? 'bg-black' : ''}`}>
+    <div className="relative w-full min-h-screen bg-black scrollbar-hide">
       {/* Vortex background */}
       <div className="fixed bg-black inset-0 z-0">
         <Vortex
@@ -23,7 +23,7 @@ export default function Background({ children }: Props) {
         />
       </div>
       {/* Content */}
-      <div className="relative z-10 w-full scrollbar-hide overflow-y-auto">
+      <div className="relative z-10 w-full min-h-screen scrollbar-hide overflow-y-auto ">
         {children}
       </div>
     </div>
