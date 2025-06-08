@@ -32,13 +32,6 @@ export function Testimonials() {
     },
     {
       quote:
-        "Say hi to Asutosh! From creating Google Forms to organizing Sheets, I streamline the backend processes to keep things running effortlessly.",
-      name: "Asutosh Dubey",
-      designation: "Organizer",
-      src: "/images/asutosh.jpeg",
-    },
-    {
-      quote:
         "Soumyadeep checking in! I’m all about managing participant groups and tracking points to keep the league engaging and fun for everyone.",
       name: "Soumyadip Banerji",
       designation: "Organizer",
