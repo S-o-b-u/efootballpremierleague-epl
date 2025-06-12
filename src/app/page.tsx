@@ -8,6 +8,7 @@ import gsap from "gsap";
 import Footer from "@/components/Footer";
 import Magnet from "@/components/Magnet";
 import { InteractiveHoverButton } from "@/components/Hoverbutton";
+import ScrollFloat from "@/components/ScrollFloat";
 
 interface AnimatedCounterProps {
   end: string | number;
@@ -59,7 +60,12 @@ const Home = () => {
 
   useEffect(() => {
     if (!loading) {
-      if (headingRef.current && textRef.current && buttonsRef.current && carouselRef.current) {
+      if (
+        headingRef.current &&
+        textRef.current &&
+        buttonsRef.current &&
+        carouselRef.current
+      ) {
         gsap.set(
           [
             headingRef.current,
@@ -198,40 +204,51 @@ const Home = () => {
                 </section>
               </div>
               <div className="text-white mt-10 md:mt-2 w-full text-center">
-                <h1
-                  ref={headingRef}
-                  className="text-[5vh] md:text-[8vh] lg:text-[12vh] leading-[1.2] custom-text mb-10"
+                <ScrollFloat
+                  animationDuration={1}
+                  ease="back.inOut(2)"
+                  scrollStart="center bottom+=50%"
+                  scrollEnd="bottom bottom-=40%"
+                  stagger={0.03}
                 >
-                  <Magnet padding={500} disabled={false} magnetStrength={50}>
-                    <span className="text-[5vh] md:text-[10vh] lg:text-[15vh] text-transparent bg-clip-text bg-gradient-to-r from-[#56c5bc] via-[#14B8A6] to-[#0EA5E9] drop-shadow-[0_0_5px_rgba(14,181,233,0.7)] animate-pulse">
-                      Your League,
-                    </span>
-                  </Magnet>
-                  <span className="text-glow">Your Legacy!</span>
-                </h1>
+                  <h1
+                    ref={headingRef}
+                    className="text-[5vh] md:text-[8vh] lg:text-[12vh] leading-[1.2] custom-text mb-10"
+                  >
+                    <Magnet padding={500} disabled={false} magnetStrength={50}>
+                      <span className="text-[5vh] md:text-[10vh] lg:text-[15vh] text-transparent bg-clip-text bg-gradient-to-r from-[#56c5bc] via-[#14B8A6] to-[#0EA5E9] drop-shadow-[0_0_5px_rgba(14,181,233,0.7)] animate-pulse">
+                        Your League,
+                      </span>
+                    </Magnet>
+                    <span className="text-glow">Your Legacy!</span>
+                  </h1>
+                </ScrollFloat>
+
                 <p
                   ref={textRef}
                   className="tracking-tighter text-[1.5vh] md:text-[2.5vh] lg:text-[3vh] px-2 md:px-4 mx-auto max-w-[85%] md:max-w-[70%] text-gray-200"
                 >
-                  Kickstart your journey in the eFootball Premier League: a world
-                  of epic matches, legendary players, and unforgettable moments on
-                  the ultimate digital field!
+                  Kickstart your journey in the eFootball Premier League: a
+                  world of epic matches, legendary players, and unforgettable
+                  moments on the ultimate digital field!
                 </p>
                 <div
                   ref={buttonsRef}
                   className="mt-6 md:mt-8 lg:mt-10  flex gap-3 flex-row justify-center items-center"
                 >
-                    <Link href={"/register"}>
-                    <InteractiveHoverButton>Ja Bhai Tu Khel</InteractiveHoverButton>
-                    </Link>
+                  <Link href={"/register"}>
+                    <InteractiveHoverButton>
+                      Ja Bhai Tu Khel
+                    </InteractiveHoverButton>
+                  </Link>
                   <h1 className="text-[3vh] md:text-[3.5vh] lg:text-[4vh] font-mono text-gray-500">
                     |
                   </h1>
-                    <Link href={"/season"}>
-                      <button className="bg-transparent text-[2vh] md:text-[2.5vh] lg:text-[3vh] text-teal-500  hover:text-teal-400 transition-all duration-300">
-                        Season
-                      </button>
-                    </Link>
+                  <Link href={"/season"}>
+                    <button className="bg-transparent text-[2vh] md:text-[2.5vh] lg:text-[3vh] text-teal-500  hover:text-teal-400 transition-all duration-300">
+                      Season
+                    </button>
+                  </Link>
                 </div>
               </div>
               <div

@@ -20,11 +20,12 @@ export function CarouselPlugin() {
   );
   // Array of image sources
   const images = [
-    "/images/bn1.jpg",
-    "/images/bn2.png",
-    "/images/bn3.jpg",
-    "/images/bn4.jpg",
-    "/images/bn5.jpg",
+    "/images/bn6.jpeg",
+    "/images/bn1.jpeg",
+    "/images/bn2.jpeg",
+    "/images/bn3.jpeg",
+    "/images/bn4.jpeg",
+    "/images/bn5.jpeg",
   ];
 
   return (
