@@ -23,8 +23,8 @@ export default function Menu() {
         {/* <DropdownItem key="Home">
           <Link href="/" style={{ display: 'block', width: '100%', height: '100%' }}>Home</Link>
         </DropdownItem> */}
-        <DropdownItem key="season">
-          <Link href="/season" style={{ display: 'block', width: '100%', height: '100%' }}>Season</Link>
+        <DropdownItem key="HallOfFame">
+          <Link href="/season" style={{ display: 'block', width: '100%', height: '100%', color: "#D53385" }}>Hall Of Fame</Link>
         </DropdownItem>
         <DropdownItem key="tournaments">
           <Link href="/tournaments" style={{ display: 'block', width: '100%', height: '100%' }}>Tournaments</Link>
