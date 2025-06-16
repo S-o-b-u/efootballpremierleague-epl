@@ -36,6 +36,8 @@ export default function InstagramGrid() {
 
   const posts = [
     
+    "https://www.instagram.com/p/DK9eQsxzwwE/",
+    "https://www.instagram.com/p/DKp3AXKTUSR/",
     "https://www.instagram.com/p/DKaIHKQT3A_/",
     "https://www.instagram.com/p/DKUUm6UzICV/",
     "https://www.instagram.com/p/DDAcEfTznEB/",
