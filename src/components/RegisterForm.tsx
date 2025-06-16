@@ -20,6 +20,15 @@ interface FormData {
 }
 
 const RegisterForm = () => {
+  const [showCopiedMessage, setShowCopiedMessage] = useState<boolean>(false);
+  const upiId = "trishandewanji69x-3@okaxis";
+
+  const handleCopyUpiId = () => {
+    navigator.clipboard.writeText(upiId);
+    setShowCopiedMessage(true);
+    setTimeout(() => setShowCopiedMessage(false), 2000);
+  };
+
   const [formData, setFormData] = useState<FormData>({
     name: "",
     phoneNumber: "",
@@ -386,7 +395,7 @@ const RegisterForm = () => {
                         "_blank"
                       )
                     }
-                    className="w-full py-3 px-6 text-white bg-green-500 rounded-lg hover:bg-green-600 font-medium transform hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+                    className="w-full py-3 px-6 text-white bg-sky-500 rounded-lg hover:bg-sky-600 font-medium transform hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -424,6 +433,30 @@ const RegisterForm = () => {
                     alt="Payment QR Code"
                     className="w-full aspect-square object-contain rounded-lg"
                   />
+                </div>
+                <div className="relative w-full max-w-[240px] sm:max-w-[280px] mx-auto">
+                  <div className="bg-black/30 border border-teal-500/30 rounded-lg p-3 backdrop-blur-sm">
+                    <p className="text-teal-200 text-sm mb-2">UPI ID (Click to copy):</p>
+                    <div className="flex items-center gap-2">
+                      <code className="flex-1 font-mono text-white bg-black/20 p-2 rounded overflow-x-auto">
+                        {upiId}
+                      </code>
+                      <button
+                        onClick={handleCopyUpiId}
+                        className="p-2 text-teal-400 hover:text-teal-300 transition-colors"
+                        title="Copy UPI ID"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                    </div>
+                    {showCopiedMessage && (
+                      <p className="absolute -bottom-6 left-0 right-0 text-center text-teal-300 text-sm animate-fadeIn">
+                        UPI ID copied!
+                      </p>
+                    )}
+                  </div>
                 </div>
                 <button
                   onClick={handlePayment}
