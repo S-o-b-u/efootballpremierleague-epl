@@ -184,7 +184,7 @@ const RegisterForm = () => {
     const isMobile = /Mobi|Android/i.test(navigator.userAgent);
     if (isMobile) {
       window.location.href =
-        "upi://pay?pa=snehasishsaha552-1@oksbi&pn=Snehasish&mc=Snehasish&tid=1234567890&tr=uniqueReferenceId&tn=Payment%20for%20Registration&am=30.00&cu=INR";
+        "upi://pay?pa=trishandewanji69x-3@okaxis&pn=Trishan&tn=Payment%20for%20Registration&am=30.00&cu=INR";
     } else {
       alert(
         "Please use a mobile device to make the payment or you can scan the QR"
@@ -417,7 +417,7 @@ const RegisterForm = () => {
                 <div className="bg-gradient-to-br from-white to-gray-100 p-2 rounded-xl shadow-2xl w-full max-w-[240px] sm:max-w-[280px] mx-auto relative z-10 transform hover:scale-[1.02] transition-all group hover:shadow-teal-500/20">
                   <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
                   <img
-                    src="./images/qr.jpeg"
+                    src="./images/qr.png"
                     alt="Payment QR Code"
                     className="w-full aspect-square object-contain rounded-lg"
                   />
