@@ -24,6 +24,7 @@
     "embla-carousel": "8.5.1",
     "embla-carousel-autoplay": "^8.5.1",
     "embla-carousel-react": "^8.5.1",
+    "formidable": "^3.5.4",
     "framer-motion": "^11.14.1",
     "glob": "^11.0.0",
     "googleapis": "^144.0.0",
@@ -48,6 +49,7 @@
   },
   "devDependencies": {
     "@types/canvas-confetti": "^1.9.0",
+    "@types/formidable": "^3.4.5",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
