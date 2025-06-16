@@ -412,6 +412,9 @@ const RegisterForm = () => {
                 <p className="text-gray-300 text-sm md:text-base hover:text-teal-200 transition-colors">
                   Scan the QR code to complete your payment
                 </p>
+                <p className="text-teal-400 text-lg font-semibold mt-2">
+                  Registration Fee: ₹30
+                </p>
               </div>
               <div className="space-y-6 flex-grow">
                 <div className="bg-gradient-to-br from-white to-gray-100 p-2 rounded-xl shadow-2xl w-full max-w-[240px] sm:max-w-[280px] mx-auto relative z-10 transform hover:scale-[1.02] transition-all group hover:shadow-teal-500/20">
