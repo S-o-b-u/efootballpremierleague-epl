@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Trophy,
   Star,
@@ -12,11 +12,14 @@ import {
   ShieldCheck,
   Clock,
   Compass,
+  Users,
 } from "lucide-react";
 import Magnet from "./Magnet";
 
-export function SeasonPage() {
-  const [selectedAchievement, setSelectedAchievement] = useState<number | null>(null);
+export function HallOfFame() {
+  const [selectedAchievement, setSelectedAchievement] = useState<number | null>(
+    null
+  );
 
   const achievements = [
     {

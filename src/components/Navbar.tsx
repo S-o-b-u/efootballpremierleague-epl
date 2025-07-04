@@ -56,74 +56,87 @@ export default function Navbar() {
 
   return (
     <>
-      <ScrollProgress className="bottom-0 " />
+      <ScrollProgress className="bottom-0" />
 
       <div
         ref={navbarRef}
-        className="fixed w-full top-0 h-[10vh] bg-zinc-900 text-white flex justify-between items-center px-4 md:px-14 backdrop-filter backdrop-blur-lg bg-opacity-30 z-50"
+        className="fixed w-full top-0 h-[10vh] bg-black text-white flex items-center px-4 md:px-14 z-50"
       >
-        <div ref={logoRef} className="flex justify-center items-center gap-3">
-          <Link href={"/"} className="flex justify-center items-center gap-3">
-            <Image
-              src="/images/logo.png"
-              alt="Description of the image"
-              width={55}
-              height={40}
-            />
-            <h1 className="hidden lg:block text-[3vh] md:text-[4.5vh]">
-              Premier League
-            </h1>
-          </Link>
-        </div>
-        <div
-          ref={linksRef}
-          className="flex justify-center items-center gap-3 md:gap-5 lg:gap-10 text-gray-50 "
-        >
-          <div className="hidden md:flex justify-center items-center gap-2  lg:gap-10">
-            <Link className="hover:text-teal-400 text-[#D53385] duration-300" href={"/season"}>
-              Hall Of Fame
-            </Link>
-            <Link
-              className="hover:text-teal-400 duration-300"
-              href={"/tournaments"}
-            >
-              Tournament
-            </Link>
-            {/* <Link
-              className="hover:text-teal-400 duration-300"
-              href={"/rankings"}
-            >
-              Rankings
-            </Link> */}
-            <Link
-              className="hover:text-teal-400 duration-300"
-              href={"/instagram"}
-            >
-              Feed
-            </Link>
-            <Link className="hover:text-teal-400 duration-300" href={"/about"}>
-              About Us
-            </Link>
-            <Link
-              className="hover:text-teal-400 duration-300"
-              href={"/contact"}
-            >
-              Contact Us
-            </Link>
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center gap-4">
+            <div className="md:hidden">
+              <Menu />
+            </div>
+            <div ref={logoRef} className="flex items-center gap-3">
+              <Link href={"/"} className="flex items-center gap-3">
+                <Image
+                  src="/images/logo.png"
+                  alt="Premier League Logo"
+                  width={55}
+                  height={40}
+                  className="object-contain"
+                />
+                <h1 className="hidden lg:block text-[3vh] md:text-[4.5vh] font-semibold">
+                  Premier League
+                </h1>
+              </Link>
+            </div>
           </div>
-          <div className=" md:hidden justify-center items-center gap-2 lg:gap-10">
-            <Menu />
-          </div>
-          <div ref={buttonRef}>
-            <Link
-              href={
-                "https://www.instagram.com/efootballpremierleague/profilecard/"
-              }
-            >
-              <button className="cursor-pointer bg-cyan-400 py-2 px-4 rounded-xl text-white font-semibold hover:bg-cyan-500 transition-all duration-300">
-                Join Us
-              </button>
-            </Link>
+
+          <div
+            ref={linksRef}
+            className="flex items-center gap-3 md:gap-5 lg:gap-10"
+          >
+            <div className="hidden md:flex items-center gap-2 lg:gap-10">
+              <Link
+                className="hover:text-teal-400 text-[#D53385] duration-300"
+                href={"/fixtures"}
+              >
+                Fixtures
+              </Link>
+              <Link
+                className="hover:text-teal-400 text-[#D53385] duration-300"
+                href={"/season"}
+              >
+                Hall Of Fame
+              </Link>
+              <Link
+                className="hover:text-teal-400 duration-300"
+                href={"/tournaments"}
+              >
+                Tournament
+              </Link>
+              <Link
+                className="hover:text-teal-400 duration-300"
+                href={"/instagram"}
+              >
+                Feed
+              </Link>
+              <Link
+                className="hover:text-teal-400 duration-300"
+                href={"/about"}
+              >
+                About Us
+              </Link>
+              <Link
+                className="hover:text-teal-400 duration-300"
+                href={"/contact"}
+              >
+                Contact Us
+              </Link>
+            </div>
+
+            <div ref={buttonRef}>
+              <Link
+                href={
+                  "https://www.instagram.com/efootballpremierleague/profilecard/"
+                }
+              >
+                <button className="cursor-pointer bg-cyan-400 py-2 px-4 rounded-xl text-white font-semibold hover:bg-cyan-500 transition-all duration-300">
+                  Join Us
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
