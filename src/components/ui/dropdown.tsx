@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@nextui-org/react";
 import { Menu, X } from "lucide-react";
@@ -16,6 +16,20 @@ export default function MobileMenu() {
     { key: "about", href: "/about", label: "About Us" },
     { key: "contact", href: "/contact", label: "Contact Us" }
   ];
+
+  // 🔒 Lock scroll on open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isOpen]);
 
   return (
     <div className="lg:hidden">
@@ -54,12 +68,13 @@ export default function MobileMenu() {
                     transition={{ delay: 0.1 * idx }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    className="overflow-hidden"
                   >
                     <Link
                       href={item.href}
                       className={`text-2xl sm:text-3xl font-semibold transition-all duration-300
-                        ${item.isSpecial 
-                          ? 'text-pink-500 hover:text-teal-300' 
+                        ${item.isSpecial
+                          ? 'text-pink-500 hover:text-teal-300'
                           : 'text-white hover:text-teal-300'}`}
                       onClick={() => setIsOpen(false)}
                     >
