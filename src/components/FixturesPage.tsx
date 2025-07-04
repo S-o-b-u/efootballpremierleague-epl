@@ -113,14 +113,14 @@ export function FixturesPage() {
 
           {/* Fixtures Table */}
           <div className="glassmorphism rounded-xl p-6 overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full border-separate border-spacing-y-4">
               <thead>
                 <tr className="border-b border-gray-700">
-                  <th className="py-3 text-left text-gray-300">Date</th>
-                  <th className="py-3 text-left text-gray-300">Player 1</th>
-                  <th className="py-3 text-center text-gray-300">VS</th>
-                  <th className="py-3 text-right text-gray-300">Player 2</th>
-                  <th className="py-3 text-center text-yellow-400">Result</th>
+                  <th className="py-3 px-4 text-left text-gray-300">Date</th>
+                  <th className="py-3 px-4 text-left text-gray-300">Player 1</th>
+                  <th className="py-3 px-4 text-center text-gray-300 w-20">VS</th>
+                  <th className="py-3 px-4 text-right text-gray-300">Player 2</th>
+                  <th className="py-3 px-4 text-center text-yellow-400">Result</th>
                 </tr>
               </thead>
               <tbody>
@@ -132,11 +132,11 @@ export function FixturesPage() {
                     transition={{ delay: index * 0.05 }}
                     className="border-b border-gray-800 hover:bg-gray-800/30 transition-colors"
                   >
-                    <td className="py-4 text-gray-400">{match.date}</td>
-                    <td className="py-4 text-cyan-400">{match.player1}</td>
-                    <td className="py-4 text-center text-gray-300">VS</td>
-                    <td className="py-4 text-right text-pink-400">{match.player2}</td>
-                    <td className="py-4 text-center text-yellow-400">{match.result}</td>
+                    <td className="py-4 px-4 text-gray-400">{match.date}</td>
+                    <td className="py-4 px-4 text-cyan-400">{match.player1}</td>
+                    <td className="py-4 px-4 text-center text-gray-300 w-20">VS</td>
+                    <td className="py-4 px-4 text-right text-pink-400">{match.player2}</td>
+                    <td className="py-4 px-4 text-center text-yellow-400">{match.result}</td>
                   </motion.tr>
                 ))}
                 {currentFixtures.length === 0 && (
