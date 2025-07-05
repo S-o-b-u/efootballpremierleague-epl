@@ -320,24 +320,27 @@ export function HallOfFame() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.5 }}
+              className="px-2 sm:px-4"
             >
-              <h2 className="text-3xl font-semibold text-center mb-8 bg-white text-transparent bg-clip-text">
+              <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-6 sm:mb-8 bg-white text-transparent bg-clip-text">
                 Man of the Matches
                 <br />
-                <span className="text-2xl font-semibold bg-gradient-to-r from-purple-400 via-fuchsia-500 to-pink-500 text-transparent bg-clip-text">
+                <span className="text-lg sm:text-2xl font-semibold bg-gradient-to-r from-purple-400 via-fuchsia-500 to-pink-500 text-transparent bg-clip-text">
                   Group Stage
                 </span>
               </h2>
-              <div className="flex justify-center mb-6 space-x-2 overflow-x-auto pb-2">
+
+              {/* Day Buttons */}
+              <div className="flex justify-center mb-4 sm:mb-6 gap-1 sm:gap-2 overflow-x-auto pb-1 sm:pb-2">
                 {Array.from({ length: 7 }, (_, i) => (
                   <button
                     key={i}
                     onClick={() => setSelectedDayIndex(i)}
-                    className={`px-4 py-2 rounded-full ${
+                    className={`px-3 py-1 sm:px-4 sm:py-2 text-sm sm:text-base rounded-full ${
                       selectedDayIndex === i
                         ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
                         : "bg-grey-900 text-gray-300"
-                    } hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 transition-all duration-300`}
+                    } transition-all duration-300`}
                     disabled={i >= next7Dates.length}
                   >
                     {i + 1}
@@ -345,61 +348,68 @@ export function HallOfFame() {
                 ))}
               </div>
 
-              <div className="max-w-3xl mx-auto bg-black bg-opacity-10 backdrop-blur-md rounded-xl p-6 text-center shadow-lg border border-white/10">
-                <h3 className="text-xl font-bold mb-4 flex justify-between bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
+              {/* Players of the Day */}
+              <div className="max-w-3xl mx-auto bg-black bg-opacity-10 backdrop-blur-md rounded-xl p-4 sm:p-6 text-center shadow-lg border border-white/10">
+                <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 flex justify-between bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
                   <span>Match Day {selectedDayIndex + 1}</span>
                   <span>{selectedDate}</span>
                 </h3>
-                <div className="grid grid-cols-2 gap-4 text-sm md:text-base">
-                  <div>
-                    <p className="text-purple-400 font-semibold">
-                      Group A: <span className="text-white">{groups.A}</span>
-                    </p>
-                    <p className="text-purple-400 font-semibold">
-                      Group B: <span className="text-white">{groups.B}</span>
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-purple-400 font-semibold">
-                      Group C: <span className="text-white">{groups.C}</span>
-                    </p>
-                    <p className="text-purple-400 font-semibold">
-                      Group D: <span className="text-white">{groups.D}</span>
-                    </p>
-                  </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 text-xs sm:text-base text-left">
+                  {["A", "B", "C", "D"].map((groupKey, idx) => (
+                    <div
+                      key={groupKey}
+                      className="flex justify-between items-start gap-2 min-w-0"
+                    >
+                      <p className="text-purple-400 font-semibold whitespace-nowrap">
+                        Group {groupKey}:
+                      </p>
+                      <p className="text-white text-right break-words flex-1">
+                        {groups[groupKey]}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              <div className="mt-10 text-center max-w-2xl mx-auto">
-                <h2 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-purple-400 via-fuchsia-500 to-pink-500 text-transparent bg-clip-text">
+              {/* Knockout Stage */}
+              <div className="mt-8 sm:mt-10 text-center max-w-2xl mx-auto px-2">
+                <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 bg-gradient-to-r from-purple-400 via-fuchsia-500 to-pink-500 text-transparent bg-clip-text">
                   Knockout Stages
                 </h2>
                 {knockoutData.map((item, index) => (
                   <motion.div
                     key={index}
-                    className="bg-black bg-opacity-10 backdrop-blur-md rounded-xl p-4 mb-4 shadow-md border border-white/10"
+                    className="bg-black bg-opacity-10 backdrop-blur-md rounded-xl p-3 sm:p-4 mb-3 sm:mb-4 shadow-md border border-white/10"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <p className="text-purple-400 font-semibold">
+                    <p className="text-purple-400 font-semibold text-sm sm:text-base">
                       {item.stage}
                     </p>
-                    <p className="text-pink-400">{item.player}</p>
-                    <p className="text-fuchsia-400">{item.date}</p>
+                    <p className="text-pink-400 text-sm sm:text-base">
+                      {item.player}
+                    </p>
+                    <p className="text-fuchsia-400 text-xs sm:text-sm">
+                      {item.date}
+                    </p>
                   </motion.div>
                 ))}
               </div>
 
-              <div className="mt-10 mb-10 text-center">
-                <h2 className="text-2xl font-semibold mb-2 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 text-transparent bg-clip-text">
+              {/* Best Player */}
+              <div className="mt-8 sm:mt-10 mb-10 text-center px-2">
+                <h2 className="text-xl sm:text-2xl font-semibold mb-2 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 text-transparent bg-clip-text">
                   Best Player of the Tournament
                 </h2>
-                <div className="bg-black bg-opacity-10 backdrop-blur-md inline-block px-6 py-4 rounded-xl shadow-lg border border-white/10">
-                  <p className="text-purple-400 font-semibold">
+                <div className="bg-black bg-opacity-10 backdrop-blur-md inline-block px-4 sm:px-6 py-3 sm:py-4 rounded-xl shadow-lg border border-white/10">
+                  <p className="text-purple-400 font-semibold text-sm sm:text-base">
                     Player: {bestPlayer.player}
                   </p>
-                  <p className="text-pink-400">Awards: {bestPlayer.count}</p>
+                  <p className="text-pink-400 text-sm sm:text-base">
+                    Awards: {bestPlayer.count}
+                  </p>
                 </div>
               </div>
             </motion.div>
