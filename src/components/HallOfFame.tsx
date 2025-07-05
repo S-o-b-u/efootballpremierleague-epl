@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, ReactNode } from "react";
 import {
   Trophy,
   Star,
@@ -12,16 +12,42 @@ import {
   ShieldCheck,
   Clock,
   Compass,
-  Users,
 } from "lucide-react";
-import Magnet from "./Magnet";
+import Footer from "./Footer";
+
+interface Achievement {
+  id: number;
+  title: string;
+  player: string;
+  value: string;
+  icon: ReactNode;
+  description: string;
+}
+
+interface MatchData {
+  date: string;
+  group: string;
+  player: string;
+}
+
+interface KnockoutData {
+  date: string;
+  stage: string;
+  player: string;
+}
 
 export function HallOfFame() {
   const [selectedAchievement, setSelectedAchievement] = useState<number | null>(
     null
   );
+  const [activeSection, setActiveSection] = useState<
+    "hallOfFame" | "manOfMatch"
+  >("hallOfFame");
+  const [groupStageData, setGroupStageData] = useState<MatchData[]>([]);
+  const [knockoutData, setKnockoutData] = useState<KnockoutData[]>([]);
+  const [selectedDayIndex, setSelectedDayIndex] = useState<number>(0);
 
-  const achievements = [
+  const achievements: Achievement[] = [
     {
       id: 1,
       title: "Most Goals in a Season",
@@ -83,7 +109,7 @@ export function HallOfFame() {
       title: "Most Accurate Passer",
       player: "Rishav Paul",
       value: "92% Accuracy",
-      icon: <Compass className="h-8 w-8 text-green-400" />,
+      icon: <Compass className="h-8 w-8 text-green-500" />,
       description: "A midfield maestro with razor-sharp passing precision.",
     },
     {
@@ -96,96 +122,291 @@ export function HallOfFame() {
     },
   ];
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const spreadsheetId = "1xOeEka4udzAQQJYnzVtG1NQc37I35FChsJ_2ED2RHvA";
+      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY;
+
+      try {
+        const groupResponse = await fetch(
+          `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/ManOfMatch!A2:C113?key=${apiKey}`
+        );
+        const knockoutResponse = await fetch(
+          `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/ManOfMatch!F4:H7?key=${apiKey}`
+        );
+
+        const groupJson = await groupResponse.json();
+        const knockoutJson = await knockoutResponse.json();
+
+        if (groupJson.values) {
+          const formattedGroup: MatchData[] = groupJson.values.map(
+            (row: string[]) => ({
+              date: row[0]?.trim() || "TBD",
+              group: row[1]?.trim() || "TBD",
+              player: row[2]?.trim() || "TBD",
+            })
+          );
+          setGroupStageData(formattedGroup);
+        }
+
+        if (knockoutJson.values) {
+          const formattedKnockout: KnockoutData[] = knockoutJson.values
+            .slice(1)
+            .map((row: string[]) => ({
+              date: row[0]?.trim() || "TBD",
+              stage: row[1]?.trim() || "TBD",
+              player: row[2]?.trim() || "TBD",
+            }));
+          setKnockoutData(formattedKnockout);
+        }
+      } catch (error) {
+        console.error("Fetch Error", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const calculateBestPlayer = () => {
+    const all = [...groupStageData, ...knockoutData];
+    const tally = all.reduce((acc: Record<string, number>, item) => {
+      acc[item.player] = (acc[item.player] || 0) + 1;
+      return acc;
+    }, {});
+    const best = Object.keys(tally).reduce(
+      (a, b) => (tally[a] > tally[b] ? a : b),
+      ""
+    );
+    return { player: best, count: tally[best] };
+  };
+
+  const groupedByDate = groupStageData.reduce(
+    (acc: Record<string, MatchData[]>, item) => {
+      if (!acc[item.date]) acc[item.date] = [];
+      acc[item.date].push(item);
+      return acc;
+    },
+    {}
+  );
+
+  const uniqueDates = Object.keys(groupedByDate).filter(
+    (date) => date !== "TBD"
+  );
+  const next7Dates = uniqueDates.slice(0, 7);
+  const selectedDate = next7Dates[selectedDayIndex] || "TBD";
+  const todayPlayers = groupedByDate[selectedDate] || [];
+
+  const groups: Record<string, string> = {
+    A: "TBD",
+    B: "TBD",
+    C: "TBD",
+    D: "TBD",
+  };
+  todayPlayers.forEach((p) => (groups[p.group] = p.player));
+
+  const bestPlayer = calculateBestPlayer();
+
   return (
-    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 text-white">
-      <div className="max-w-7xl mx-auto">
-        {/* Heading */}
-        <div className="text-center mb-12">
-          <Magnet padding={500} disabled={false} magnetStrength={50}>
-            <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400">
-              Hall of Fame
-            </h1>
-          </Magnet>
-          <p className="mt-4 text-xl text-gray-300">
-            Celebrating the legendary moments and heroic performances
-          </p>
+    <>
+      <div className="min-h-screen px-4 text-white">
+        <div className="text-center flex flex-col items-center mb-8 gap-10">
+          <motion.h1
+            className="text-5xl font-bold text-white mb-4 font-efootball-stencil"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            Season Highlights
+          </motion.h1>
+          <div className="space-x-4 flex">
+            {[
+              { key: "hallOfFame", label: "Hall of Fame" },
+              { key: "manOfMatch", label: "Man of the Match" },
+            ].map(({ key, label }) => (
+              <motion.button
+                key={key}
+                onClick={() =>
+                  setActiveSection(key as "hallOfFame" | "manOfMatch")
+                }
+                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.05 }}
+                className={`px-6 py-2 rounded-full transition-all duration-300 ${
+                  activeSection === key
+                    ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg"
+                    : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                }`}
+              >
+                {label}
+              </motion.button>
+            ))}
+          </div>
         </div>
 
-        {/* Achievements Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {achievements.map((achievement) => (
+        <AnimatePresence mode="wait">
+          {activeSection === "hallOfFame" && (
             <motion.div
-              key={achievement.id}
-              className={`glassmorphism rounded-xl p-6 cursor-pointer transition-all duration-300 ${
-                selectedAchievement === achievement.id
-                  ? "scale-105 ring-2 ring-cyan-400"
-                  : "hover:scale-105"
-              }`}
-              onClick={() =>
-                setSelectedAchievement(
-                  selectedAchievement === achievement.id ? null : achievement.id
-                )
-              }
-              whileHover={{ y: -5 }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
+              key="hall"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 50 }}
+              transition={{ duration: 0.5 }}
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  {achievement.icon}
-                  <h3 className="text-xl font-semibold text-white">
-                    {achievement.title}
-                  </h3>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-300">Player</span>
-                  <span className="text-emerald-400 font-semibold">
-                    {achievement.player}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-300">Stat</span>
-                  <span className="text-cyan-400 font-semibold">
-                    {achievement.value}
-                  </span>
-                </div>
-
-                {selectedAchievement === achievement.id && (
-                  <motion.p
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="mt-4 text-gray-400 text-sm"
+              <h2 className="text-3xl font-semibold text-center mb-8">
+                Hall of Fame
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {achievements.map((achievement) => (
+                  <motion.div
+                    key={achievement.id}
+                    className={`glassmorphism rounded-xl p-6 cursor-pointer transition-all duration-300 ${
+                      selectedAchievement === achievement.id
+                        ? "scale-105 ring-2 ring-cyan-400"
+                        : "hover:scale-105"
+                    }`}
+                    onClick={() =>
+                      setSelectedAchievement(
+                        selectedAchievement === achievement.id
+                          ? null
+                          : achievement.id
+                      )
+                    }
+                    whileHover={{ y: -5 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    {achievement.description}
-                  </motion.p>
-                )}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        {achievement.icon}
+                        <h3 className="text-xl font-semibold text-white">
+                          {achievement.title}
+                        </h3>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-300">Player</span>
+                        <span className="text-emerald-400 font-semibold">
+                          {achievement.player}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-300">Stat</span>
+                        <span className="text-cyan-400 font-semibold">
+                          {achievement.value}
+                        </span>
+                      </div>
+                      {selectedAchievement === achievement.id && (
+                        <motion.p
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="mt-4 text-gray-400 text-sm"
+                        >
+                          {achievement.description}
+                        </motion.p>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
-          ))}
-        </div>
+          )}
 
-        {/* CTA */}
-        <div className="mt-16 text-center">
-          <p className="text-gray-400 text-lg">
-            Dream of making it to the Hall of Fame?
-          </p>
-          <Magnet padding={500} disabled={false} magnetStrength={50}>
-            <a
-              href="https://www.instagram.com/efootballpremierleague/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-4 px-8 py-3 bg-gradient-to-r from-emerald-400 to-cyan-400 text-black font-semibold rounded-full hover:opacity-90 transition-opacity"
+          {activeSection === "manOfMatch" && (
+            <motion.div
+              key="man"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.5 }}
             >
-              Join the Next Season
-            </a>
-          </Magnet>
-        </div>
+              <h2 className="text-3xl font-semibold text-center mb-8 bg-white text-transparent bg-clip-text">
+                Man of the Matches
+                <br />
+                <span className="text-2xl font-semibold bg-gradient-to-r from-purple-400 via-fuchsia-500 to-pink-500 text-transparent bg-clip-text">
+                  Group Stage
+                </span>
+              </h2>
+              <div className="flex justify-center mb-6 space-x-2 overflow-x-auto pb-2">
+                {Array.from({ length: 7 }, (_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedDayIndex(i)}
+                    className={`px-4 py-2 rounded-full ${
+                      selectedDayIndex === i
+                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                        : "bg-grey-900 text-gray-300"
+                    } hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 transition-all duration-300`}
+                    disabled={i >= next7Dates.length}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
+
+              <div className="max-w-3xl mx-auto bg-black bg-opacity-10 backdrop-blur-md rounded-xl p-6 text-center shadow-lg border border-white/10">
+                <h3 className="text-xl font-bold mb-4 flex justify-between bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
+                  <span>Match Day {selectedDayIndex + 1}</span>
+                  <span>{selectedDate}</span>
+                </h3>
+                <div className="grid grid-cols-2 gap-4 text-sm md:text-base">
+                  <div>
+                    <p className="text-purple-400 font-semibold">
+                      Group A: <span className="text-white">{groups.A}</span>
+                    </p>
+                    <p className="text-purple-400 font-semibold">
+                      Group B: <span className="text-white">{groups.B}</span>
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-purple-400 font-semibold">
+                      Group C: <span className="text-white">{groups.C}</span>
+                    </p>
+                    <p className="text-purple-400 font-semibold">
+                      Group D: <span className="text-white">{groups.D}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-10 text-center max-w-2xl mx-auto">
+                <h2 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-purple-400 via-fuchsia-500 to-pink-500 text-transparent bg-clip-text">
+                  Knockout Stages
+                </h2>
+                {knockoutData.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    className="bg-black bg-opacity-10 backdrop-blur-md rounded-xl p-4 mb-4 shadow-md border border-white/10"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <p className="text-purple-400 font-semibold">
+                      {item.stage}
+                    </p>
+                    <p className="text-pink-400">{item.player}</p>
+                    <p className="text-fuchsia-400">{item.date}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-10 mb-10 text-center">
+                <h2 className="text-2xl font-semibold mb-2 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 text-transparent bg-clip-text">
+                  Best Player of the Tournament
+                </h2>
+                <div className="bg-black bg-opacity-10 backdrop-blur-md inline-block px-6 py-4 rounded-xl shadow-lg border border-white/10">
+                  <p className="text-purple-400 font-semibold">
+                    Player: {bestPlayer.player}
+                  </p>
+                  <p className="text-pink-400">Awards: {bestPlayer.count}</p>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }

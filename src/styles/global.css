@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'MyFont';
-  src: url('/fonts/Barriecito-Regular.ttf') format('truetype');
+  font-family: "MyFont";
+  src: url("/fonts/efootball-stencil-regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -8,49 +8,61 @@
 @tailwind components;
 @tailwind utilities;
 .custom-background {
-    background-color: hsla(130, 0%, 4%, 1);
-    background-image: 
-        radial-gradient(at 79% 0%, hsla(258, 100%, 50%, 0.44) 0px, transparent 50%),
-        radial-gradient(at 40% 98%, hsla(266, 100%, 40%, 0.57) 0px, transparent 50%);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-    width: 100vw;
+  background-color: hsla(130, 0%, 4%, 1);
+  background-image: radial-gradient(
+      at 79% 0%,
+      hsla(258, 100%, 50%, 0.44) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 40% 98%, hsla(266, 100%, 40%, 0.57) 0px, transparent 50%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
 }
-
 
 /* Footer Specific Styles */
 footer {
-    position: relative;
-    z-index: 10;
+  position: relative;
+  z-index: 10;
+}
+
+footer a:hover {
+  text-decoration: none;
+}
+
+.newsletter-input:focus {
+  box-shadow: 0 0 0 2px rgba(163, 230, 53, 0.5);
+}
+
+@media (max-width: 768px) {
+  footer {
+    text-align: center;
   }
-  
-  footer a:hover {
-    text-decoration: none;
+
+  footer .grid {
+    gap: 2rem;
   }
-  
-  .newsletter-input:focus {
-    box-shadow: 0 0 0 2px rgba(163, 230, 53, 0.5);
-  }
-  
-  @media (max-width: 768px) {
-    footer {
-      text-align: center;
-    }
-  
-    footer .grid {
-      gap: 2rem;
-    }
-  }
- /* Custom animations */
+}
+/* Custom animations */
 @keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.1); }
-  50% { box-shadow: 0 0 30px rgba(34, 211, 238, 0.2); }
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-5px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 /* Custom styles */

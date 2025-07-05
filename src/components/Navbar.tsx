@@ -60,7 +60,7 @@ export default function Navbar() {
 
       <div
         ref={navbarRef}
-        className="fixed w-full top-0 h-[10vh] bg-black text-white flex items-center px-4 md:px-14 z-50"
+        className="fixed w-full top-0 h-[10vh] bg-black bg-opacity-80 text-white flex items-center px-4 md:px-14 z-50"
       >
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-4">

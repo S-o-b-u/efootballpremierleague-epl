@@ -14,10 +14,11 @@ import { useEffect } from "react";
 import localFont from 'next/font/local';
 import Footer from "@/components/Footer";
 
-const barriecito = localFont({
-  src: '../../../public/fonts/Barriecito-Regular.ttf',
-  variable: '--font-barriecito'
+const efootballStencil = localFont({
+  src: '../../../public/fonts/efootball-stencil-regular.ttf',
+  variable: '--font-efootball-stencil'
 });
+
 
 export default function InstagramGrid() {
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function InstagramGrid() {
   return (
     <section className="min-h-screen py-20 px-4 overflow-y-auto scroll-smooth">
       <div className="max-w-7xl mx-auto">
-        <h2 className={`text-5xl text-center text-white font-bold mb-12 ${barriecito.className}`}>
+        <h2 className={`text-5xl text-center text-white mb-12 ${efootballStencil.className}`}>
           Our Instagram Feed 🐐
         </h2>
 
