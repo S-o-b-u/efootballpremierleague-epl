@@ -75,7 +75,10 @@ export function FixturesPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-cyan-400"></div>
+        <div className="relative">
+          <div className="h-16 w-16 rounded-full border-8 border-t-transparent border-gray-800 animate-[spin_1s_linear_infinite]"></div>
+          <div className="absolute top-0 h-16 w-16 rounded-full border-8 border-t-transparent border-white animate-[spin_1.5s_linear_infinite]"></div>
+        </div>
       </div>
     );
   }
