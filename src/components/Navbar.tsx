@@ -81,6 +81,15 @@ export default function Navbar() {
                 </h1>
               </Link>
             </div>
+            <div className="flex ml-2 items-center gap-5">
+              <div className="relative flex items-center">
+                <span className="absolute -left-2 w-2 h-2 bg-lime-400 rounded-full animate-ping"></span>
+                <span className="absolute -left-2 w-2 h-2 bg-lime-400 rounded-full"></span>
+                <p className="text-lime-500 font-semibold ml-2 animate-pulse">
+                  LIVE
+                </p>
+              </div>
+            </div>
           </div>
 
           <div
